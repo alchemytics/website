@@ -19,3 +19,11 @@
 # Релизы
 
 TBD
+
+# Скрипты
+
+## Деплой
+
+```
+helm --kubeconfig <PATH TO CONFIG> install --set env=<DEV or PROD> --set appVersion=<VERSION> alchemytics-website-release ./k8s/alchemytics-website
+```
