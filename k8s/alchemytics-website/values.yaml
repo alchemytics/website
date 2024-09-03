@@ -1,0 +1,9 @@
+name:
+    prefix: alchemytics
+    project: website
+
+deploy:
+    app:
+        port: 4321
+    service:
+        port: 80

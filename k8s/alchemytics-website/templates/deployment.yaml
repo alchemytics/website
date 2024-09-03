@@ -1,32 +1,38 @@
+{{- $prefix := .Values.name.prefix -}}
+{{- $project := .Values.name.project -}}
+
 apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: alchemytics-website
+  name: {{ $prefix }}-{{ $project }}
   namespace: {{ .Values.env }}
   labels:
-    app: alchemytics-website
+    app: {{ $prefix }}-{{ $project }}
+    env: {{ .Values.env }}
 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: alchemytics-website
+      app: {{ $prefix }}-{{ $project }}
+      env: {{ .Values.env }}
   template:
     metadata:
       labels:
-        app: alchemytics-website
+        app: {{ $prefix }}-{{ $project }}
+        env: {{ .Values.env }}
     spec:
       containers:
-      - name: alchemytics-website
+      - name: {{ $prefix }}-{{ $project }}
         {{- if eq .Values.env "dev" }}
-        image: ghcr.io/alchemytics/website:dev-{{ .Values.appVersion }}
+        image: ghcr.io/{{ $prefix }}/{{ $project }}:dev-{{ .Values.appVersion }}
         {{- else }}
-        image: ghcr.io/alchemytics/website:{{ .Values.appVersion }}
+        image: ghcr.io/{{ $prefix }}/{{ $project }}:{{ .Values.appVersion }}
         {{- end}}
         imagePullPolicy: Always
         ports:
-        - containerPort: 4321
+        - containerPort: {{ .Values.deploy.app.port }}
           protocol: TCP
       imagePullSecrets:
       - name: ghcr-login-secret
