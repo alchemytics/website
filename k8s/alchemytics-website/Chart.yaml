@@ -1,0 +1,6 @@
+apiVersion: v2
+name: alchemytics-website
+description: A Helm chart for Alchemytics Website
+
+type: application
+version: 0.0.1

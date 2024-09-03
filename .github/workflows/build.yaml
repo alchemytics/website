@@ -46,7 +46,7 @@ jobs:
               if: steps.image_exists.outputs.tag == 'not found'
               with:
                   context: .
-                  file: Dockerfile
+                  file: k8s/Dockerfile
                   push: true
                   platforms: linux/amd64
                   tags: ghcr.io/alchemytics/website:${{ env.BUILD_SUFFIX }}${{ env.VERSION }}

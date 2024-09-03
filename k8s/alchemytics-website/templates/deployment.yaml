@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: alchemytics-website
+  namespace: {{ .Values.env }}
+  labels:
+    app: alchemytics-website
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alchemytics-website
+  template:
+    metadata:
+      labels:
+        app: alchemytics-website
+    spec:
+      containers:
+      - name: alchemytics-website
+        {{- if eq .Values.env "dev" }}
+        image: ghcr.io/alchemytics/website:dev-{{ .Values.appVersion }}
+        {{- else }}
+        image: ghcr.io/alchemytics/website:{{ .Values.appVersion }}
+        {{- end}}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 4321
+          protocol: TCP
+      imagePullSecrets:
+      - name: ghcr-login-secret
