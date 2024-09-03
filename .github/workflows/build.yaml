@@ -1,0 +1,55 @@
+name: Image Build
+
+on:
+    push:
+        branches:
+            - main
+            - dev
+
+env:
+    REGISTRY: ghcr.io
+    IMAGE_NAME: ${{ github.repository }}
+    RUNTIME_ENVIRONMENT: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
+    BUILD_SUFFIX: ${{ fromJSON('["dev-", ""]')[github.ref == 'refs/heads/main'] }}
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            packages: write
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v3
+            - name: Log in to the Container registry
+              uses: docker/login-action@v3
+              with:
+                  registry: ${{ env.REGISTRY }}
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+            - name: Get env vars
+              uses: cardinalby/export-env-action@v2
+              with:
+                  envFile: "version.env"
+                  expand: "true"
+            - name: Check version
+              uses: tyriis/docker-image-tag-exists@v2.0.0
+              id: image_exists
+              with:
+                  registry: ghcr.io/alchemytics
+                  repository: website
+                  tag: ${{ env.BUILD_SUFFIX }}${{ env.VERSION }}
+            - name: Build website
+              uses: docker/build-push-action@v5
+              if: steps.image_exists.outputs.tag == 'not found'
+              with:
+                  context: .
+                  file: ci-cd/Dockerfile
+                  push: true
+                  platforms: linux/amd64
+                  tags: ghcr.io/alchemytics/website:${{ env.BUILD_SUFFIX }}${{ env.VERSION }}
+                  labels: |
+                      env=${{ env.RUNTIME_ENVIRONMENT }}
+                      version=${{ env.VERSION }}
