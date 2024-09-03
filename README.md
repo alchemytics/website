@@ -14,6 +14,7 @@
 -   [Astro](https://astro.build/) - основной фреймворк для разработки сайта
 -   [Tailwind CSS](https://tailwindcss.com/) - фреймворк для управления CSS на сайте
 -   [Docker](https://www.docker.com/) - технология для контейнеризации
+-   [Helm](https://helm.sh/) - для деплоя и управления релизами
 
 # Релизы
 
