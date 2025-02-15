@@ -29,7 +29,9 @@ docker build . --tag alchemytics-website-local:latest
 **Запуск сайта локально**
 
 ```bash
-docker run --publish 4321:4321 alchemytics-website-local:latest
+docker run --publish 4321:4321 alchemytics-website-local:latest --detach
 ```
+
+Обратите внимание, что данная команда запускает контейнер в фоновом режиме, так что позже его нужно будет принудительно завершить через команду `docker stop <CONTAINER ID>`.
 
 После этого он будет доступен локально по адресу http://localhost:4321
