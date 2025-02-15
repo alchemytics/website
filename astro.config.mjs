@@ -1,18 +1,19 @@
-import { defineConfig } from "astro/config";
-
-import mdx from "@astrojs/mdx";
-import tailwind from "@astrojs/tailwind";
-import sitemap from "@astrojs/sitemap";
-
-import node from "@astrojs/node";
+// @ts-check
+import { defineConfig } from 'astro/config';
+import alpinejs from '@astrojs/alpinejs';
+import node from '@astrojs/node';
+import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-    site: "https://alchemytics.ru",
-    integrations: [tailwind(), mdx(), sitemap()],
-    output: "server",
-    adapter: node({
-        mode: "standalone",
-        host: true,
-    }),
+  site: "https://alchemytics.ru",
+  integrations: [alpinejs(), mdx(), sitemap()],
+  adapter: node({
+    mode: 'standalone'
+  }),
+  vite: {
+    plugins: [tailwindcss()]
+  }
 });

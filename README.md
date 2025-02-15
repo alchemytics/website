@@ -11,19 +11,25 @@
 
 Для разработки текущей актуальной версии использовались следующие технологии:
 
--   [Astro](https://astro.build/) - основной фреймворк для разработки сайта
--   [Tailwind CSS](https://tailwindcss.com/) - фреймворк для управления CSS на сайте
--   [Docker](https://www.docker.com/) - технология для контейнеризации
--   [Helm](https://helm.sh/) - для деплоя и управления релизами
+- [Astro](https://astro.build/) - основной фреймворк для разработки сайта
+- [Tailwind CSS](https://tailwindcss.com/) - фреймворк для управления CSS на сайте
+- [Alpine.js](https://alpinejs.dev/) - фреймворк для создания интерактивных realtime объектов на сайте
+- [Docker](https://www.docker.com/) - технология для контейнеризации
 
-# Релизы
+# Запуск
 
-TBD
+Для локальной сборки проекта нужно иметь установленный докер и выполнить следующие команды:
 
-# Скрипты
+**Сборка образа**
 
-## Деплой
-
+```bash
+docker build . --tag alchemytics-website-local:latest
 ```
-helm --kubeconfig <PATH TO CONFIG> install --set env=<DEV or PROD> --set appVersion=<VERSION> alchemytics-website-release ./k8s/alchemytics-website
+
+**Запуск сайта локально**
+
+```bash
+docker run --publish 4321:4321 alchemytics-website-local:latest
 ```
+
+После этого он будет доступен локально по адресу http://localhost:4321
