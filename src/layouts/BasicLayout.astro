@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+
+const { title } = Astro.props;
 ---
 
 <html lang="ru">
@@ -8,7 +10,7 @@ import "../styles/global.css";
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
-        <title>Настоящая алхимия данных ~ Alchemytics</title>
+        <title>{title} ~ Alchemytics</title>
     </head>
     <body class="bg-background text-font-primary">
         <slot />
