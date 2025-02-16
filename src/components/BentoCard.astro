@@ -1,0 +1,9 @@
+---
+const { width = 1, height = 1 } = Astro.props;
+
+const classes = `sm:row-span-${height} sm:col-span-${width}`;
+---
+
+<div class=`${classes} rounded-lg border-[2px] p-2 hover:border-font-accent`>
+    <slot />
+</div>

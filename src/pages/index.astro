@@ -1,10 +1,21 @@
 ---
 import BasicLayout from "../layouts/BasicLayout.astro";
+
+import BentoTable from "../components/BentoTable.astro";
+import BentoCard from "../components/BentoCard.astro";
 ---
 
 <BasicLayout title="Настоящая алхимия данных">
-    <div class="flex min-h-[100vh] flex-col items-center justify-center gap-4">
+    <div class="mb-8 flex flex-col items-center justify-center gap-4">
         <h1 class="text-font-accent text-5xl">Alchemytics</h1>
         <h2 class="text-3xl">Настоящая алхимия данных</h2>
     </div>
+
+    <BentoTable>
+        <BentoCard width="3" height="2">1</BentoCard>
+        <BentoCard width="1" height="5">2</BentoCard>
+        <BentoCard width="2" height="3">3</BentoCard>
+        <BentoCard width="1" height="2">4</BentoCard>
+        <BentoCard width="1" height="1">5</BentoCard>
+    </BentoTable>
 </BasicLayout>
