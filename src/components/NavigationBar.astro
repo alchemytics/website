@@ -2,9 +2,20 @@
 
 ---
 
-<nav class="flex w-full flex-row justify-between gap-16">
-    <div class="my-auto">ICON</div>
-    <div class="my-auto flex max-w-xl grow flex-row justify-between">
+<nav
+    class="relative flex w-full flex-row justify-between gap-16"
+    x-data="{ open: window.innerWidth >= 768 }"
+    x-cloak
+>
+    <button class="block md:hidden" x-on:click="open = ! open">
+        <img class="h-8 w-8 object-contain" src="/icons/menu.svg" alt="Menu" />
+    </button>
+    <div class="my-auto hidden md:block">ICON</div>
+    <div
+        class="absolute top-8 left-0 my-auto flex max-w-xl grow flex-col justify-between md:relative md:inset-0 md:flex-row"
+        x-show="open"
+        x-transition
+    >
         <div>Ref 1</div>
         <div>Ref 2</div>
         <div>Ref 3</div>

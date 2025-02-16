@@ -13,3 +13,7 @@
 
     --color-error: #ff4c4c;
 }
+
+[x-cloak] {
+    display: none !important;
+}
