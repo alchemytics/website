@@ -1,6 +1,8 @@
 ---
 import "../styles/global.css";
 
+import NavigationBar from "../components/NavigationBar.astro";
+
 const { title } = Astro.props;
 ---
 
@@ -13,6 +15,7 @@ const { title } = Astro.props;
         <title>{title} ~ Alchemytics</title>
     </head>
     <body class="bg-background text-font-primary m-4">
+        <NavigationBar />
         <slot />
     </body>
 </html>
