@@ -1,9 +1,34 @@
 ---
-const { width = 1, height = 1 } = Astro.props;
+interface Props {
+    width: string;
+    height: string;
+}
 
-const classes = `sm:row-span-${height} sm:col-span-${width}`;
+const { width = "1", height = "1" } = Astro.props;
+
+const col_classes: { [id: string]: string } = {
+    "1": "md:col-span-1",
+    "2": "md:col-span-2",
+    "3": "md:col-span-3",
+    "4": "md:col-span-4",
+    "5": "md:col-span-5",
+};
+
+const row_classes: { [id: string]: string } = {
+    "1": "md:row-span-1",
+    "2": "md:row-span-2",
+    "3": "md:row-span-3",
+    "4": "md:row-span-4",
+    "5": "md:row-span-5",
+};
 ---
 
-<div class=`${classes} rounded-lg border-[2px] p-2 hover:border-font-accent`>
+<div
+    class:list={[
+        "hover:border-font-accent rounded-lg border-[2px] p-2",
+        row_classes[height],
+        col_classes[width],
+    ]}
+>
     <slot />
 </div>
